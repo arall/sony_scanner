@@ -1,0 +1,22 @@
+rules:
+  - id: insecure-use-sprintf-fn
+    languages:
+      - c
+    message:
+      Avoid using user-controlled format strings passed into 'sprintf', 'printf'
+      and 'vsprintf'.
+
+      These functions put you at risk of buffer overflow vulnerabilities through the use of format string exploits.
+
+      Instead, use 'snprintf' and 'vsnprintf'.
+    metadata:
+      category: security
+      license: Commons Clause License Condition v1.0[LGPL-2.1-only]
+      references:
+        - https://doc.castsoftware.com/display/SBX/Never+use+sprintf%28%29+or+vsprintf%28%29+functions
+        - https://www.cvedetails.com/cwe-details/134/Uncontrolled-Format-String.html
+    pattern-either:
+      - pattern: sprintf
+      - pattern: printf
+      - pattern: vsprintf
+    severity: ERROR
